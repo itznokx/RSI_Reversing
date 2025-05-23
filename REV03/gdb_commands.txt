@@ -1,0 +1,19 @@
+gdb commands
+
+set disable-randomization  		// Evita que o número base do programa seja aleatorizado toda vez que o programa encerra no debugger
+starti 							// inicia o programa com um breapoint na função 'entry'
+info proc mappings 				// Obtenha o memory set base do programa para auxiliar na leitura do código no Ghidra
+								// Identifique o programa e coloque um breakpoint no lugar  (provavelmente 0x555555554000)
+breakpoint *0x"memory_address"	// Provavelmente memory_address = 0x55555555520b
+info registers					// veja os registradores
+x/10i							// veja 10 instruções a partir do endereço de parada
+commands breakpoint_n			// No comando da linha 7 será informado o número do breakpoint
+								// Se você perdeu esse número, use o comando: "info breakpoints" ou "i b"
+{
+	silent						// Evita o print de "lixos" que poluem na hora de recuperar a senha
+	printf "%c", $ecx			// Printa o caracter que está carregado no registrador ecx
+	set $r8 = $ecx				// Põe o valor do registrador ecx no valor do registrador r8
+	continue					// Comando para continuar até o fim da instrução do asm
+	end 						// Comando do gdb para encerrar uma instrução
+}
+continue
