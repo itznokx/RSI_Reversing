@@ -3,7 +3,7 @@ senha = [0x42, 0x5f, 0x31, 0x4d, 0x39, 0x25, 0x54, 0x25, 0x46, 0x48, 0x28, 0x6e,
 def reverse_password (lista):
     final = ""
     for n in range (0,len(lista)-1):
-        final+= chr((n ^ lista[n]) + 0x11 & 0xFF)
+        final+= chr((n ^ lista[n]) + 0x11)
     print(final)
 print(len(senha))
 reverse_password(senha)
